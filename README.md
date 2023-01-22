@@ -80,14 +80,14 @@ $ cd habits
 # Install dependencies
 $ npm i 
 
-# Run the project
-$ npm rum dev 
-
 # execute migration dev prisma
 $ npx prisma migrate dev
 
 # Populate database
 $ npx prisma db seed
+
+# Run the project
+$ npm rum dev 
 
 
 
