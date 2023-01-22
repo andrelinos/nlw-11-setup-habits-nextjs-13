@@ -19,7 +19,7 @@
 
 </p>
 
-<hr> -->
+<hr>
 
 <p align="center">
   <a href="#about">About</a> &#xa0; | &#xa0;
@@ -58,7 +58,7 @@ The following tools were used in this project:
 The following tools were used in this project:
 
 - [React](https://pt-br.reactjs.org/)
-- [Next.js](https://nextjs.org/)
+- [Next.js 13](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 
 ## :white_check_mark: Requirements ##
