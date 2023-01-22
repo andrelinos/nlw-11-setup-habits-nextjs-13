@@ -68,6 +68,28 @@ Before starting :checkered_flag:, you need to have installed.
 - [Git](https://git-scm.com)
 - [Node](https://nodejs.org/en/)
 
+### Database required ###
+
+- [Docker](https://www.docker.com/)
+- [Postgres](https://www.postgresql.org/)
+
+__ Tips: [How to install docker in your system](https://docs.docker.com/desktop/)
+
+## If you will use docker ##
+
+```bash
+docker run --name postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
+```
+
+### Config for .env.local ###
+
+Note: Rename ``.env.example`` to ``.env.local``
+
+```json
+DATABASE_URL="postgresql://postgres:docker@localhost:5432/postgres?schema=habits"
+```
+
 ## :checkered_flag: Starting ##
 
 ```bash
