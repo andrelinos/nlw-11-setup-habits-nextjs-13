@@ -53,7 +53,7 @@ export function SummaryTable() {
                     );
                 })}
             </div>
-            {isLoading ? (
+            {isLoading && amountOfDaysToFill <= 0 ? (
                 <SummaryLoading />
             ) : (
                 <div className="grid grid-rows-7 grid-flow-col gap-3">

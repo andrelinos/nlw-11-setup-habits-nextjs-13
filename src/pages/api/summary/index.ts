@@ -16,24 +16,21 @@ export default async function handler(
               (
                 SELECT
                   cast(count(*) as float)
-                FROM day_habits DH -- DH é alias da tabela day habits
+                FROM day_habits DH 
                 WHERE DH.day_id = D.id
               ) as completed,
               (
                 SELECT
                   cast(count(*) as float)
-                FROM habit_week_days HDW -- HDW é alias da tabela habit_week_days
+                FROM habit_week_days HDW 
                 JOIN habits H
                   ON H.id = HDW.habit_id
                 WHERE
-                  -- Esta formatação só funciona no SQLite
-                  -- HDW.week_day = cast(strftime('%w', D.date/1000.0, 'unixepoch') as int)
                   HDW.week_day = extract(dow FROM D.date)
       
-                  -- É feita uma verificação se o hábito foi antes ou no dia da data
                   AND H.created_at <= D.date
               ) as amount
-            FROM days D -- D é alias da tabela days
+            FROM days D 
           `;
 
             return res.status(200).json(summary);

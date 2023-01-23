@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-toastify';
+import Cookie from 'js-cookie';
 
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { Check } from 'phosphor-react';
@@ -19,6 +20,8 @@ const availableWeekDays = [
 export function NewHabitForm() {
     const [title, setTitle] = useState('');
     const [weekDays, setWeekDays] = useState<number[]>([]);
+
+    const token = Cookie.get('token');
 
     async function createNewHabit(event: FormEvent) {
         event.preventDefault();
@@ -109,15 +112,27 @@ export function NewHabitForm() {
                 ))}
             </div>
 
-            <button
-                type="submit"
-                className="mt-6 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold
+            {token ? (
+                <button
+                    type="submit"
+                    className="mt-6 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold
         bg-green-600 hover:bg-green-500 transition-colors focus:outline-none focus:ring-2
         focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-zinc-900"
-            >
-                <Check size={20} weight="bold" />
-                Confirmar
-            </button>
+                >
+                    <Check size={20} weight="bold" />
+                    Confirmar
+                </button>
+            ) : (
+                <button
+                    className="mt-6 rounded-lg p-4 flex items-center justify-center gap-3 font-semibold
+                    bg-gray-400 hover:bg-gray-400 transition-colors focus:outline-none focus:ring-2
+                    focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-zinc-900 opacity-30 disabled:hover:cursor-not-allowed"
+                    disabled
+                >
+                    <Check size={20} weight="bold" />
+                    Confirmar
+                </button>
+            )}
         </form>
     );
 }
