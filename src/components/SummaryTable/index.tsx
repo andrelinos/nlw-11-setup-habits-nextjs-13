@@ -32,7 +32,7 @@ export function SummaryTable() {
     useEffect(() => {
         try {
             api.get('summary').then((response) => {
-                // setSummary(response.data);
+                setSummary(response.data);
                 console.log(response.data);
             });
         } finally {
