@@ -26,18 +26,18 @@ type Summary = {
 }[];
 
 export function SummaryTable() {
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [summary, setSummary] = useState<Summary>([]);
 
-    useEffect(() => {
-        try {
-            api.get('summary').then((response) => {
-                setSummary(response.data);
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    }, []);
+    // useEffect(() => {
+    //     try {
+    //         api.get('summary').then((response) => {
+    //             setSummary(response.data);
+    //         });
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // }, []);
 
     return (
         <div className="w-full flex">

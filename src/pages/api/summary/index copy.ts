@@ -15,19 +15,20 @@ export default async function handler(
               D.date,
               (
                 SELECT
-                  cast(count(*) as decimal(15,2))
+                  cast(count(*) as float)
                 FROM day_habits DH 
                 WHERE DH.day_id = D.id
               ) as completed,
               (
                 SELECT
-                  cast(count(*) as decimal(15,2))
+                  cast(count(*) as float)
                 FROM habit_week_days HDW 
                 JOIN habits H
                   ON H.id = HDW.habit_id
                 WHERE
-                HDW.week_day = cast(extract(day FROM D.date) as int)      
-                AND H.created_at <= D.date
+                  HDW.week_day = extract(dow FROM report_dt) FROM D.date
+      
+                  AND H.created_at <= D.date
               ) as amount
             FROM days D 
           `;
