@@ -26,7 +26,7 @@ export default async function handler(
                 JOIN habits H
                   ON H.id = HDW.habit_id
                 WHERE
-                HDW.week_day = cast(extract(day FROM D.date) as int)      
+                HDW.week_day = cast(extract(day FROM D.date) as decimal(15,2))
                 AND H.created_at <= D.date
               ) as amount
             FROM days D 
