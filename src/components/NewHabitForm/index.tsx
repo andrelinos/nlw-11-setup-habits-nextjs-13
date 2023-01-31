@@ -5,8 +5,6 @@ import Cookie from 'js-cookie';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { Check } from 'phosphor-react';
 
-import { api } from '~/lib/axios';
-
 const availableWeekDays = [
     'Domingo',
     'Segunda-feira',
@@ -39,10 +37,10 @@ export function NewHabitForm() {
         }
 
         try {
-            await api.post('habits', {
-                title,
-                weekDays,
-            });
+            // await api.post('habits', {
+            //     title,
+            //     weekDays,
+            // });
 
             setTitle('');
             setWeekDays([]);

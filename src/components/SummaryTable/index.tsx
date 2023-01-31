@@ -6,7 +6,6 @@ import dayjs from 'dayjs';
 
 import { HabitDay } from '../HabitDay';
 
-import { api } from '~/lib/axios';
 import { generateDatesFromYearBeginning } from '~/utils/generate-dates-from-year-beginning';
 import { Loading } from '../Loading';
 import { SummaryLoading } from '../SummaryLoading';
@@ -31,10 +30,18 @@ export function SummaryTable() {
 
     useEffect(() => {
         try {
-            api.get('summary').then((response) => {
-                setSummary(response.data);
-                console.log(response.data);
-            });
+            fetch('http://localhost:3000/api/summary', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setSummary(data);
+                    console.log(data);
+                })
+                .catch((error) => console.error('Algo deu ruim!'));
         } finally {
             setIsLoading(false);
         }

@@ -9,7 +9,7 @@ import LogoImage from '../../assets/logo.svg';
 export function Header() {
     return (
         <div className="w-full max-w-3xl mx-auto flex items-center justify-between">
-            <Image width={148} height={72} src={LogoImage} alt="" />
+            <Image width={148} height={72} src={LogoImage} alt="" priority />
 
             <Dialog.Root>
                 <Dialog.Trigger

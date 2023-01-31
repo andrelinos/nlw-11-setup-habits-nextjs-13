@@ -36,6 +36,11 @@ export default async function handler(
 
             return res.status(200).json(habit);
         }
+        case 'GET': {
+            const habits = prisma.habit.findMany();
+
+            return res.status(200).json(habits);
+        }
         default:
             break;
     }

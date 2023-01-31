@@ -9,7 +9,7 @@ export default async function handler(
 ) {
     const method = req.method;
 
-    console.log(req.query);
+    // console.log(req.query);
 
     switch (method) {
         case 'GET': {

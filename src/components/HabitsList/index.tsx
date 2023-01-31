@@ -4,7 +4,6 @@ import * as Checkbox from '@radix-ui/react-checkbox';
 import dayjs from 'dayjs';
 import { Check } from 'phosphor-react';
 
-import { api } from '~/lib/axios';
 import { Loading } from '../Loading';
 
 interface HabitLisProps {
@@ -31,7 +30,19 @@ export function HabitsList({ date, onCompletedChanged }: HabitLisProps) {
                 const isHabitAlreadyCompleted =
                     habitsInfo.completedHabits.includes(habitId);
 
-                await api.patch(`/habits/${habitId}/toggle`);
+                await fetch(
+                    `http://localhost:3000/api/habits/${habitId}/toggle`,
+                    {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    },
+                )
+                    .then((res) => res.json())
+                    .then((data) => {
+                        return data;
+                    });
 
                 let completedHabits: string[] = [];
 
@@ -62,14 +73,20 @@ export function HabitsList({ date, onCompletedChanged }: HabitLisProps) {
 
     useEffect(() => {
         setIsLoading(true);
+        const dateQuery = date.toISOString();
         try {
-            api.get('day', {
-                params: {
-                    date: date.toISOString(),
+            fetch(`http://localhost:3000/api/day?date=${dateQuery}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8',
                 },
-            }).then((response) => {
-                setHabitsInfo(response.data);
-            });
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    setHabitsInfo(data);
+                })
+                .catch((error) => console.error('erro habits id \n', error));
         } finally {
             setIsLoading(false);
         }
