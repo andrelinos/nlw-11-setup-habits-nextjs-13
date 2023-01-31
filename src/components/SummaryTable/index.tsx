@@ -28,9 +28,10 @@ export function SummaryTable() {
     const [isLoading, setIsLoading] = useState(false);
     const [summary, setSummary] = useState<Summary>([]);
 
+    const baseUrl = process?.env?.BASE_URL || '';
     useEffect(() => {
         try {
-            fetch('http://localhost:3000/api/summary', {
+            fetch(`${baseUrl}/api/summary`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,12 +41,11 @@ export function SummaryTable() {
                 .then((data) => {
                     setSummary(data);
                     console.log(data);
-                })
-                .catch((error) => console.error('Algo deu ruim!'));
+                });
         } finally {
             setIsLoading(false);
         }
-    }, []);
+    }, [baseUrl]);
 
     return (
         <div className="w-full flex">

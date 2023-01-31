@@ -37,11 +37,12 @@ export function NewHabitForm() {
         }
 
         try {
+            // const baseUrl = process?.env?.BASE_URL || '';
             // await api.post('habits', {
             //     title,
             //     weekDays,
             // });
-            // fetch('http://localhost:3000/api/habits', {
+            // fetch(`${baseUrl}/api/habits`, {
             //     method: 'POST',
             //     headers: {
             //         'Content-Type': 'application/json',

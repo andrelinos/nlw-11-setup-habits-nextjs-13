@@ -31,7 +31,7 @@ export function HabitsList({ date, onCompletedChanged }: HabitLisProps) {
                     habitsInfo.completedHabits.includes(habitId);
 
                 await fetch(
-                    `http://localhost:3000/api/habits/${habitId}/toggle`,
+                    `${process.env.BASE_URL}/api/habits/${habitId}/toggle`,
                     {
                         method: 'PATCH',
                         headers: {
@@ -73,9 +73,11 @@ export function HabitsList({ date, onCompletedChanged }: HabitLisProps) {
 
     useEffect(() => {
         setIsLoading(true);
+        const baseUrl = process?.env?.BASE_URL || '';
+
         const dateQuery = date.toISOString();
         try {
-            fetch(`http://localhost:3000/api/day?date=${dateQuery}`, {
+            fetch(`${baseUrl}/api/day?date=${dateQuery}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
