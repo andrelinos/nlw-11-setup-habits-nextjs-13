@@ -37,10 +37,12 @@ export function SummaryTable() {
                     'Content-Type': 'application/json',
                 },
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    response.json(), console.log('response: ', response);
+                })
                 .then((data) => {
-                    setSummary(data);
-                    console.log(data);
+                    // setSummary(data);
+                    console.log('data: ', data);
                 });
         } finally {
             setIsLoading(false);
