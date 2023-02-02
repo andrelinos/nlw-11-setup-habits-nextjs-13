@@ -32,10 +32,9 @@ export function SummaryTable() {
 
     console.log(Cookies.get('error-cookie'));
 
-    const baseUrl = process?.env?.BASE_URL || '';
     useEffect(() => {
         try {
-            fetch(`${baseUrl}/api/summary`, {
+            fetch(`/api/summary`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,12 +43,11 @@ export function SummaryTable() {
                 .then((response) => response.json())
                 .then((data) => {
                     setSummary(data);
-                    console.log(data);
                 });
         } finally {
             setIsLoading(false);
         }
-    }, [baseUrl]);
+    }, []);
 
     return (
         <div className="w-full flex">

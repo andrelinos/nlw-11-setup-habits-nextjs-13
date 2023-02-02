@@ -26,12 +26,11 @@ export function HabitsList({ date, onCompletedChanged }: HabitLisProps) {
 
     async function handleToggleHabit(habitId: string) {
         try {
-            const baseUrl = process?.env?.BASE_URL || '';
             if (habitId && habitsInfo) {
                 const isHabitAlreadyCompleted =
                     habitsInfo.completedHabits.includes(habitId);
 
-                await fetch(`${baseUrl}/api/habits/${habitId}/toggle`, {
+                await fetch(`/api/habits/${habitId}/toggle`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -71,11 +70,10 @@ export function HabitsList({ date, onCompletedChanged }: HabitLisProps) {
 
     useEffect(() => {
         setIsLoading(true);
-        const baseUrl = process?.env?.BASE_URL || '';
 
         const dateQuery = date.toISOString();
         try {
-            fetch(`${baseUrl}/api/day?date=${dateQuery}`, {
+            fetch(`/api/day?date=${dateQuery}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8',
