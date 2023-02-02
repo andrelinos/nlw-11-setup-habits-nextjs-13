@@ -26,19 +26,17 @@ export function HabitsList({ date, onCompletedChanged }: HabitLisProps) {
 
     async function handleToggleHabit(habitId: string) {
         try {
+            const baseUrl = process?.env?.BASE_URL || '';
             if (habitId && habitsInfo) {
                 const isHabitAlreadyCompleted =
                     habitsInfo.completedHabits.includes(habitId);
 
-                await fetch(
-                    `${process.env.BASE_URL}/api/habits/${habitId}/toggle`,
-                    {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                await fetch(`${baseUrl}/api/habits/${habitId}/toggle`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
                     },
-                )
+                })
                     .then((res) => res.json())
                     .then((data) => {
                         return data;

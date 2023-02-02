@@ -11,8 +11,7 @@ export default async function handler(
 
     switch (method) {
         case 'GET': {
-            try {
-                const summary = await prisma.$queryRaw`
+            const summary = await prisma.$queryRaw`
             SELECT
               D.id,
               D.date,
@@ -35,15 +34,7 @@ export default async function handler(
             FROM days D 
           `;
 
-                return res.status(200).json(summary);
-            } catch (error: any) {
-                setCookie(res, 'error-cookie', error.message, {
-                    path: '/',
-                    maxAge: 2592000,
-                });
-                res.end(res.getHeader('Set-Cookie'));
-                console.log('ERRORRRRRR: ', error);
-            }
+            return res.status(200).json(summary);
         }
         default:
             return res.status(405).end();

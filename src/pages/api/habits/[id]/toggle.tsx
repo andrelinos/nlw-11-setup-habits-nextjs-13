@@ -9,8 +9,6 @@ export default async function handler(
 ) {
     const method = req.method;
 
-    console.log('REQ: ', req.query);
-
     switch (method) {
         case 'PATCH': {
             const toggleHabitParams = z.object({
@@ -18,6 +16,7 @@ export default async function handler(
             });
 
             const { id } = toggleHabitParams.parse(req.query);
+            console.log('entrou no patch: ', id);
 
             const today = dayjs().startOf('day').toDate();
 
