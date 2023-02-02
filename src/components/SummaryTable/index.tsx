@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
+import Cookies from 'js-cookie';
+
 import dayjs from 'dayjs';
 
 import { HabitDay } from '../HabitDay';
@@ -28,6 +30,8 @@ export function SummaryTable() {
     const [isLoading, setIsLoading] = useState(false);
     const [summary, setSummary] = useState<Summary>([]);
 
+    console.log(Cookies.get('error-cookie'));
+
     const baseUrl = process?.env?.BASE_URL || '';
     useEffect(() => {
         try {
@@ -37,12 +41,10 @@ export function SummaryTable() {
                     'Content-Type': 'application/json',
                 },
             })
-                .then((response) => {
-                    response.json(), console.log('response: ', response);
-                })
+                .then((response) => response.json())
                 .then((data) => {
-                    // setSummary(data);
-                    console.log('data: ', data);
+                    setSummary(data);
+                    console.log(data);
                 });
         } finally {
             setIsLoading(false);

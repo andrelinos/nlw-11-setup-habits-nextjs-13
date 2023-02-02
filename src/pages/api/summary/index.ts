@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from '~/lib/prisma';
+import Cookies from 'js-cookie';
+import { setCookie } from '~/utils/cookies';
 
 export default async function handler(
     req: NextApiRequest,
@@ -9,7 +11,8 @@ export default async function handler(
 
     switch (method) {
         case 'GET': {
-            const summary = await prisma.$queryRaw`
+            try {
+                const summary = await prisma.$queryRaw`
             SELECT
               D.id,
               D.date,
@@ -32,7 +35,15 @@ export default async function handler(
             FROM days D 
           `;
 
-            return res.status(200).json(summary);
+                return res.status(200).json(summary);
+            } catch (error: any) {
+                setCookie(res, 'error-cookie', error.message, {
+                    path: '/',
+                    maxAge: 2592000,
+                });
+                res.end(res.getHeader('Set-Cookie'));
+                console.log('ERRORRRRRR: ', error);
+            }
         }
         default:
             return res.status(405).end();
