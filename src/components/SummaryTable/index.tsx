@@ -30,8 +30,6 @@ export function SummaryTable() {
     const [isLoading, setIsLoading] = useState(false);
     const [summary, setSummary] = useState<Summary>([]);
 
-    console.log(Cookies.get('error-cookie'));
-
     useEffect(() => {
         try {
             fetch(`/api/summary`, {
