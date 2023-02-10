@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "npx prisma migrate deploy"
+    "vercel-build": "npx prisma migrate dev"
   },
   "dependencies": {
     "@next/font": "13.1.4",
